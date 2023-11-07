@@ -35,7 +35,9 @@ type ThreadMessage struct {
 
 // CreateThread creates a new thread.
 func (c *Client) CreateThread(ctx context.Context, request ThreadRequest) (response Thread, err error) {
-	req, err := c.newRequest(ctx, http.MethodPost, c.fullURL(threadsSuffix), withBody(request))
+	req, err := c.newRequest(ctx, http.MethodPost, c.fullURL(threadsSuffix), withBody(request), func(args *requestOptions) {
+		args.header.Set("OpenAI-Beta", "assistants=v1")
+	})
 	if err != nil {
 		return
 	}
