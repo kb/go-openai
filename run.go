@@ -41,7 +41,7 @@ type Run struct {
 	// The instructions that the [assistant](/docs/api-reference/assistants) used for this run.
 	Instructions string `json:"instructions"`
 	// The list of tools that the [assistant](/docs/api-reference/assistants) used for this run.
-	Tools []Tool `json:"tools"`
+	Tools []RunTool `json:"tools"`
 	// The list of [File](/docs/api-reference/files) IDs the [assistant](/docs/api-reference/assistants) used for this run.
 	FileIds []string `json:"file_ids"`
 	// metadata_description
@@ -55,7 +55,7 @@ type RequiredAction struct {
 	SubmitToolOutputs SubmitToolOutputs `json:"submit_tool_outputs"`
 }
 
-type Tool struct {
+type RunTool struct {
 	Type string `json:"type"`
 }
 
@@ -63,7 +63,7 @@ type SubmitToolOutputs struct {
 	ToolCalls []ToolCall `json:"tool_calls"`
 }
 
-type ToolCall struct {
+type RunToolCall struct {
 	ID       string   `json:"id"`
 	Type     string   `json:"type"`
 	Function Function `json:"function"`
