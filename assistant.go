@@ -95,9 +95,7 @@ func (c *Client) RetrieveAssistant(
 	assistantID string,
 ) (response Assistant, err error) {
 	urlSuffix := fmt.Sprintf("%s/%s", assistantsSuffix, assistantID)
-	req, err := c.newRequest(ctx, http.MethodGet, c.fullURL(urlSuffix), func(args *requestOptions) {
-		args.header.Set("OpenAI-Beta", "assistants=v1")
-	})
+	req, err := c.newRequest(ctx, http.MethodGet, c.fullURL(urlSuffix), withBetaAssistantV1())
 	if err != nil {
 		return
 	}
@@ -165,9 +163,7 @@ func (c *Client) ListAssistants(
 	}
 
 	urlSuffix := fmt.Sprintf("%s%s", assistantsSuffix, encodedValues)
-	req, err := c.newRequest(ctx, http.MethodGet, c.fullURL(urlSuffix), func(args *requestOptions) {
-		args.header.Set("OpenAI-Beta", "assistants=v1")
-	})
+	req, err := c.newRequest(ctx, http.MethodGet, c.fullURL(urlSuffix), withBetaAssistantV1())
 	if err != nil {
 		return
 	}
